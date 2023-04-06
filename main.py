@@ -9,21 +9,19 @@ import os
 
 
 # Gets Variables Entered into Text Fields
-def getTextFields(user,passw,start, end,years,yearStart,shapefile):
+def getTextFields(user,passw,start, end,years,yearStart):
     global username
     global password
     global startMonth
     global endMonth
     global startYear
     global yearCount
-    global shapefile_path
     username = user.get()
     password = passw.get()
     startMonth = int(start.get())
     endMonth = int(end.get())
     startYear = int(yearStart.get())
     yearCount = int(years.get())
-    shapefile_path = shapefile.get()
     root.destroy()
 
 root = tk.Tk()
@@ -33,7 +31,6 @@ monthStartText = tk.StringVar()
 monthEndText= tk.StringVar()
 yearCountText = tk.StringVar()
 yearStartText = tk.StringVar()
-shapePath = tk.StringVar()
 
 root.geometry("900x500")
 root.title("this APPEEARS to be useful")
@@ -74,15 +71,9 @@ yearCountBox = tk.Entry(root,font='Arial',textvariable=yearCountText)
 yearCountLabel.grid(row=5,column=0,padx=100,pady=10)
 yearCountBox.grid(row=5,column=1)
 
-'''
-shapeFileLabel = tk.Label(root,text="Shapefile Path (Use Double Slashes):")
-shapeFileBox = tk.Entry(root,font='Arial',textvariable=shapePath)
-#shapeFileLabel.grid(row=6,column=0,padx=100,pady=10)
-#shapeFileBox.grid(row=6,column=1)
-'''
 
 # Go! Button
-button = tk.Button(root, text = "Go!",command=lambda: getTextFields(usernameBox,passwordBox,monthStartBox,monthEndBox,yearCountBox,yearStartBox,shapeFileBox))
+button = tk.Button(root, text = "Go!",command=lambda: getTextFields(usernameBox,passwordBox,monthStartBox,monthEndBox,yearCountBox,yearStartBox))
 button.grid(row=7,column=1)
 
 root.mainloop()
