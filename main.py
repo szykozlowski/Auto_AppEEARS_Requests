@@ -5,12 +5,65 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import tkinter as tk
+import customtkinter as ctk
 import os
 
+def tkinterCall():
+    root = ctk.CTk()
+    userText = tk.StringVar()
+    passText = tk.StringVar()
+    monthStartText = tk.StringVar()
+    monthEndText= tk.StringVar()
+    yearCountText = tk.StringVar()
+    yearStartText = tk.StringVar()
+    delayText = tk.StringVar()
 
+    root.geometry("600x500")
+    root.title("this APPEEARS to be useful")
+    ctk.set_default_color_theme("green")
+    ctk.set_appearance_mode("dark")
 
+    userLabel = ctk.CTkLabel(root,text="Username:")
+    usernameBox = ctk.CTkEntry(root,font=("arial", 12),textvariable=userText)
+    userLabel.grid(row=0,column=0,padx=0,pady=10)
+    usernameBox.grid(row=0,column=1)
+
+    passLabel = ctk.CTkLabel(root,text="Password:")
+    passwordBox = ctk.CTkEntry(root,font=("arial", 12),textvariable=passText,show="*")
+    passLabel.grid(row=1,column=0,padx=0,pady=10)
+    passwordBox.grid(row=1,column=1)
+
+    monthStartLabel = ctk.CTkLabel(root,text="Start Month:")
+    monthStartBox = ctk.CTkEntry(root,font=("arial", 12),textvariable=monthStartText)
+    monthStartLabel.grid(row=2,column=0,padx=100,pady=10)
+    monthStartBox.grid(row=2,column=1)
+
+    monthEndLabel = ctk.CTkLabel(root,text="End Month:")
+    monthEndBox = ctk.CTkEntry(root,font=("arial", 12),textvariable=monthEndText)
+    monthEndLabel.grid(row=3,column=0,padx=0,pady=10)
+    monthEndBox.grid(row=3,column=1)
+
+    yearStartLabel = ctk.CTkLabel(root,text="Start Year:")
+    yearStartBox = ctk.CTkEntry(root,font=("arial", 12),textvariable=yearStartText)
+    yearStartLabel.grid(row=4,column=0,padx=0,pady=10)
+    yearStartBox.grid(row=4,column=1)
+
+    yearCountLabel = ctk.CTkLabel(root,text="Year Count:")
+    yearCountBox = ctk.CTkEntry(root,font=("arial", 12),textvariable=yearCountText)
+    yearCountLabel.grid(row=5,column=0,padx=0,pady=10)
+    yearCountBox.grid(row=5,column=1)
+
+    delayLabel = ctk.CTkLabel(root,text="Delay: (start with 15)")
+    delayBox = ctk.CTkEntry(root,font=("arial", 12),textvariable=delayText)
+    delayLabel.grid(row=6,column=0,padx=0,pady=10)
+    delayBox.grid(row=6,column=1)
+
+    button = ctk.CTkButton(root, text = "Go!",command=lambda: getTextFields(usernameBox,passwordBox,monthStartBox,monthEndBox,yearCountBox,yearStartBox,delayBox,root))
+    button.grid(row=9,column=1)
+
+    root.mainloop()
 # !!!!!!! CHANGE TO USERNAME/PASSWORD TO APPEARS !!!!!!!
-def getTextFields(user,passw,start, end,years,yearStart,delayNum):
+def getTextFields(user,passw,start, end,years,yearStart,delayNum,root):
     global username
     global password
     global startMonth
@@ -27,82 +80,17 @@ def getTextFields(user,passw,start, end,years,yearStart,delayNum):
     delay = int(delayNum.get())
     root.destroy()
 
-root = tk.Tk()
-userText = tk.StringVar()
-passText = tk.StringVar()
-monthStartText = tk.StringVar()
-monthEndText= tk.StringVar()
-yearCountText = tk.StringVar()
-yearStartText = tk.StringVar()
-delayText = tk.StringVar()
-
-root.geometry("900x500")
-root.title("this APPEEARS to be useful")
-
-userLabel = tk.Label(root,text="Username:")
-usernameBox = tk.Entry(root,font='Arial',textvariable=userText)
-userLabel.grid(row=0,column=0,padx=100,pady=10)
-usernameBox.grid(row=0,column=1)
-
-passLabel = tk.Label(root,text="Password:")
-passwordBox = tk.Entry(root,font='Arial',textvariable=passText,show="*")
-passLabel.grid(row=1,column=0,padx=100,pady=10)
-passwordBox.grid(row=1,column=1)
-
-monthStartLabel = tk.Label(root,text="Start Month:")
-monthStartBox = tk.Entry(root,font='Arial',textvariable=monthStartText)
-monthStartLabel.grid(row=2,column=0,padx=100,pady=10)
-monthStartBox.grid(row=2,column=1)
-
-monthEndLabel = tk.Label(root,text="End Month:")
-monthEndBox = tk.Entry(root,font='Arial',textvariable=monthEndText)
-monthEndLabel.grid(row=3,column=0,padx=100,pady=10)
-monthEndBox.grid(row=3,column=1)
-
-yearStartLabel = tk.Label(root,text="Start Year:")
-yearStartBox = tk.Entry(root,font='Arial',textvariable=yearStartText)
-yearStartLabel.grid(row=4,column=0,padx=100,pady=10)
-yearStartBox.grid(row=4,column=1)
-
-yearCountLabel = tk.Label(root,text="Year Count:")
-yearCountBox = tk.Entry(root,font='Arial',textvariable=yearCountText)
-yearCountLabel.grid(row=5,column=0,padx=100,pady=10)
-yearCountBox.grid(row=5,column=1)
-
-
-delayLabel = tk.Label(root,text="Delay: (start with 15)")
-delayBox = tk.Entry(root,font='Arial',textvariable=delayText)
-delayLabel.grid(row=6,column=0,padx=100,pady=10)
-delayBox.grid(row=6,column=1)
-
-
-
-
-button = tk.Button(root, text = "Go!",command=lambda: getTextFields(usernameBox,passwordBox,monthStartBox,monthEndBox,yearCountBox,yearStartBox,delayBox))
-button.grid(row=7,column=1)
-
-
-#button.pack(pady=20,padx=20)
-
-root.mainloop()
-
 def checkLeap(year):
     if(year % 4 == 0):
         return True
     return False
 
-#username = "skozlowski@chapman.edu"
-#password = "Szymek123!"
+tkinterCall()
 
 months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 days = [-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-'''
-startYear = 2019
-yearCount = 1
-startMonth = 6
-endMonth = 9
-'''
+
 # Open a chrome window that links to the APPEARS website
 
 ser = Service(r"C:\chromedriver.exe")
@@ -117,7 +105,8 @@ driver.find_element(By.ID, "username").send_keys(username)
 driver.find_element(By.ID, "password").send_keys(password)
 driver.find_element(By.NAME, "commit").click()
 time.sleep(5)
-
+#driver.quit()
+#tkinterCall()
 # Starts a new request
 
 button = driver.find_element(By.XPATH, ("//img[@class='thumbnail ng-star-inserted']"))
@@ -145,13 +134,14 @@ time.sleep(2)
 
 # Finds the desired projection
 projection = driver.find_element(By.ID, "projection")
-projection.send_keys("Geographic")
+projection.send_keys("Native Projection")
 time.sleep(2)
 
 # Clicks on the desired projection, and adds it
 projection.send_keys(Keys.ENTER)
 
-# x = input()
+#print("Select desired data, type something in the console, then enter")
+#x = input()
 button = driver.find_element(By.XPATH,
                              "//*[@id='top']/app-root/div/main/app-task/div[2]/form/div[2]/div/app-area-selector/div/div[3]/div[1]/div[2]/div[2]")
 button.click()
