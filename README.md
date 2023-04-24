@@ -20,6 +20,6 @@ Rename your shapefile "Shapefile", and put it in the same directory as the Pytho
 
 ## Step 3: 
 
-Run the program, and input your AppEEARS login info, and desired temporal range of data.  The optimal delay will vary between machines, so tune it as needed.  
+Run the program and input your AppEEARS login info, as well as the desired temporal range of data.  The optimal delay will vary between machines, so tune it as needed.  
 
 ![AppEEARSSSSSSS](https://user-images.githubusercontent.com/92408910/234077387-63e819b3-7817-4ada-bbb1-e158d2511746.PNG)
