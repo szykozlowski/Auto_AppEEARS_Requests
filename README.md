@@ -12,7 +12,13 @@ Download Chromedriver for your respective operating system. (https://chromedrive
 
 ![chromedriv](https://user-images.githubusercontent.com/92408910/234077946-e1bd893f-b64c-45af-9e2a-f10f8fc75be2.PNG)
 
-## Step 2: 
+## Step 2:
+
+Rename your shapefile "Shapefile", and put it in the same directory as the Python file.
+
+![direct](https://user-images.githubusercontent.com/92408910/234078748-8681b8c7-73e8-4518-82fe-52724c560031.PNG)
+
+## Step 3: 
 
 Run the program, and input your AppEEARS login info, and desired temporal range of data.  The optimal delay will vary between machines, so tune it as needed.  
 
