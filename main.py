@@ -8,6 +8,22 @@ import tkinter as tk
 import customtkinter as ctk
 import os
 
+ser = Service(r"C:\chromedriver.exe")
+op = webdriver.ChromeOptions()
+driver = webdriver.Chrome(service=ser, options=op)
+
+def login():
+
+    driver.get("https://appeears.earthdatacloud.nasa.gov/task/area")
+    time.sleep(3)
+
+    # Inputs username and password
+
+    driver.find_element(By.ID, "username").send_keys(username)
+    driver.find_element(By.ID, "password").send_keys(password)
+    driver.find_element(By.NAME, "commit").click()
+    time.sleep(5)
+
 def tkinterCall():
     root = ctk.CTk()
     userText = tk.StringVar()
@@ -19,7 +35,7 @@ def tkinterCall():
     delayText = tk.StringVar()
 
     root.geometry("600x500")
-    root.title("this APPEEARS to be useful")
+    root.title("AppEEARS")
     ctk.set_default_color_theme("green")
     ctk.set_appearance_mode("dark")
 
@@ -60,7 +76,6 @@ def tkinterCall():
 
     button = ctk.CTkButton(root, text = "Go!",command=lambda: getTextFields(usernameBox,passwordBox,monthStartBox,monthEndBox,yearCountBox,yearStartBox,delayBox,root))
     button.grid(row=9,column=1)
-
     root.mainloop()
 # !!!!!!! CHANGE TO USERNAME/PASSWORD TO APPEARS !!!!!!!
 def getTextFields(user,passw,start, end,years,yearStart,delayNum,root):
@@ -71,6 +86,7 @@ def getTextFields(user,passw,start, end,years,yearStart,delayNum,root):
     global startYear
     global yearCount
     global delay
+
     username = user.get()
     password = passw.get()
     startMonth = int(start.get())
@@ -78,7 +94,11 @@ def getTextFields(user,passw,start, end,years,yearStart,delayNum,root):
     startYear = int(yearStart.get())
     yearCount = int(years.get())
     delay = int(delayNum.get())
+    login()
     root.destroy()
+
+
+
 
 def checkLeap(year):
     if(year % 4 == 0):
@@ -92,19 +112,8 @@ days = [-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 
 # Open a chrome window that links to the APPEARS website
+#login()
 
-ser = Service(r"C:\chromedriver.exe")
-op = webdriver.ChromeOptions()
-driver = webdriver.Chrome(service=ser, options=op)
-driver.get("https://appeears.earthdatacloud.nasa.gov/task/area")
-time.sleep(3)
-
-# Inputs username and password
-
-driver.find_element(By.ID, "username").send_keys(username)
-driver.find_element(By.ID, "password").send_keys(password)
-driver.find_element(By.NAME, "commit").click()
-time.sleep(5)
 #driver.quit()
 #tkinterCall()
 # Starts a new request
@@ -124,13 +133,13 @@ shapefile = driver.find_element(By.ID, "shapeFileUpload")
 shapefile.send_keys(shapefile_path)
 time.sleep(2)
 # Finds the desired component
-driver.find_element(By.ID, "product").send_keys(("wue"))
-time.sleep(2)
+# driver.find_element(By.ID, "product").send_keys(("wue"))
+# time.sleep(2)
 
 # Clicks on the desired component
-button = driver.find_element(By.XPATH, ("//button[@class='dropdown-item active ng-star-inserted']"))
-button.click()
-time.sleep(2)
+# button = driver.find_element(By.XPATH, ("//button[@class='dropdown-item active ng-star-inserted']"))
+# button.click()
+# time.sleep(2)
 
 # Finds the desired projection
 projection = driver.find_element(By.ID, "projection")
@@ -140,11 +149,11 @@ time.sleep(2)
 # Clicks on the desired projection, and adds it
 projection.send_keys(Keys.ENTER)
 
-#print("Select desired data, type something in the console, then enter")
-#x = input()
-button = driver.find_element(By.XPATH,
-                             "//*[@id='top']/app-root/div/main/app-task/div[2]/form/div[2]/div/app-area-selector/div/div[3]/div[1]/div[2]/div[2]")
-button.click()
+print("Select desired data, type something in the console, then enter")
+x = input()
+#button = driver.find_element(By.XPATH,
+                             #"//*[@id='top']/app-root/div/main/app-task/div[2]/form/div[2]/div/app-area-selector/div/div[3]/div[1]/div[2]/div[2]")
+#button.click()
 time.sleep(3)
 
 # Loops for the desired number of days
