@@ -1,4 +1,4 @@
-# Import necessary Selenium libraries
+# Import necessary libraries
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -7,6 +7,9 @@ from selenium.webdriver.common.keys import Keys
 import tkinter as tk
 import customtkinter as ctk
 import os
+from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.webdriver.support.wait import WebDriverWait
 
 ser = Service(r"C:\chromedriver.exe")
 op = webdriver.ChromeOptions()
@@ -15,14 +18,14 @@ driver = webdriver.Chrome(service=ser, options=op)
 def login():
 
     driver.get("https://appeears.earthdatacloud.nasa.gov/task/area")
-    time.sleep(3)
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "username")))
 
     # Inputs username and password
 
     driver.find_element(By.ID, "username").send_keys(username)
     driver.find_element(By.ID, "password").send_keys(password)
     driver.find_element(By.NAME, "commit").click()
-    time.sleep(5)
+
 
 def tkinterCall():
     root = ctk.CTk()
@@ -117,7 +120,7 @@ days = [-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 #driver.quit()
 #tkinterCall()
 # Starts a new request
-
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, ("//img[@class='thumbnail ng-star-inserted']"))))
 button = driver.find_element(By.XPATH, ("//img[@class='thumbnail ng-star-inserted']"))
 button.click()
 time.sleep(2)
@@ -132,14 +135,6 @@ shapefile_path = os.path.join(working_directory,shapefile_path)
 shapefile = driver.find_element(By.ID, "shapeFileUpload")
 shapefile.send_keys(shapefile_path)
 time.sleep(2)
-# Finds the desired component
-# driver.find_element(By.ID, "product").send_keys(("wue"))
-# time.sleep(2)
-
-# Clicks on the desired component
-# button = driver.find_element(By.XPATH, ("//button[@class='dropdown-item active ng-star-inserted']"))
-# button.click()
-# time.sleep(2)
 
 # Finds the desired projection
 projection = driver.find_element(By.ID, "projection")
@@ -151,9 +146,7 @@ projection.send_keys(Keys.ENTER)
 
 print("Select desired data, type something in the console, then enter")
 x = input()
-#button = driver.find_element(By.XPATH,
-                             #"//*[@id='top']/app-root/div/main/app-task/div[2]/form/div[2]/div/app-area-selector/div/div[3]/div[1]/div[2]/div[2]")
-#button.click()
+
 time.sleep(3)
 
 # Loops for the desired number of days
@@ -178,9 +171,9 @@ for i in range(yearCount):
 
             # Submits the request
             text.send_keys(Keys.ENTER)
-
+            time.sleep(3)
             # Waits until the request is submitted.  Based on speed, this can be increased/decreased
-            time.sleep(5 + delay)
+            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="top"]/app-root/div/app-alert/p/ngb-alert')))
 
             # Clears all of the text fields
             driver.find_element(By.ID, "taskName").clear()
